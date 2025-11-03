@@ -26,14 +26,22 @@ const SEOPage = () => {
         description={seoConfig.description}
         keywords={seoConfig.keywords}
         path={seoConfig.path}
+        schemaType={seoConfig.schemaType}
       />
       <Header />
-      <Hero onGetStarted={scrollToGenerator} />
+      <Hero 
+        onGetStarted={scrollToGenerator} 
+        h1={seoConfig.h1}
+        subtitle={seoConfig.heroSubtitle}
+      />
       <SignatureGenerator />
       <Features />
-      <SEOContent />
+      <SEOContent 
+        variant={seoConfig.variant}
+        uniqueContent={seoConfig.uniqueContent}
+      />
       <Testimonials />
-      <FAQ />
+      <FAQ variant={seoConfig.variant} />
       <Footer />
       <BackToTop />
     </div>
