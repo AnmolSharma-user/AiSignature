@@ -2,11 +2,17 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { RotatingText } from "./RotatingText";
 
-export const Hero = ({
-  onGetStarted
-}: {
+interface HeroProps {
   onGetStarted: () => void;
-}) => {
+  h1?: string;
+  subtitle?: string;
+}
+
+export const Hero = ({
+  onGetStarted,
+  h1 = "Create Your Perfect",
+  subtitle = "Generate 10 unique, professional signature styles instantly with our AI-powered tool. 100% Free. No signup. Download in PNG or SVG."
+}: HeroProps) => {
   const keywords = [
     "AI Signature Generator",
     "AI Signature Maker",
@@ -33,15 +39,14 @@ export const Hero = ({
           
           
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.2] tracking-tight">
-            Create Your Perfect
+            {h1}
             <span className="block mt-3 text-white drop-shadow-lg">
               <RotatingText texts={keywords} className="inline-block" />
             </span>
           </h1>
           
           <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed font-light">
-            Generate 10 unique, professional signature styles instantly with our AI-powered tool. 
-            <span className="block mt-2 font-medium">100% Free. No signup. Download in PNG or SVG.</span>
+            {subtitle}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
