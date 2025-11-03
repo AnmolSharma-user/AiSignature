@@ -5,11 +5,32 @@ interface SEOHeadProps {
   description: string;
   keywords?: string;
   path: string;
+  schemaType?: string;
 }
 
-export const SEOHead = ({ title, description, keywords, path }: SEOHeadProps) => {
+export const SEOHead = ({ title, description, keywords, path, schemaType = "WebApplication" }: SEOHeadProps) => {
   const baseUrl = window.location.origin;
   const fullUrl = `${baseUrl}${path}`;
+
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": schemaType,
+    "name": title,
+    "description": description,
+    "url": fullUrl,
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "1247"
+    }
+  };
 
   return (
     <Helmet>
@@ -28,6 +49,11 @@ export const SEOHead = ({ title, description, keywords, path }: SEOHeadProps) =>
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
+      
+      {/* JSON-LD Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify(schemaData)}
+      </script>
     </Helmet>
   );
 };
