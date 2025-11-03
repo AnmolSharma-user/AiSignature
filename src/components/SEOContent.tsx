@@ -34,7 +34,37 @@ const features = [
   }
 ];
 
-export const SEOContent = () => {
+interface SEOContentProps {
+  variant?: 'generator' | 'maker' | 'creator' | 'free';
+  uniqueContent?: string;
+}
+
+export const SEOContent = ({ variant = 'generator', uniqueContent }: SEOContentProps) => {
+  const getMainTitle = () => {
+    switch (variant) {
+      case 'maker':
+        return 'The Ultimate AI Signature Maker Guide';
+      case 'creator':
+        return 'Professional AI Signature Creator';
+      case 'free':
+        return 'Free AI Signature Generation - No Cost, No Limits';
+      default:
+        return 'The Ultimate AI Signature Generator Guide';
+    }
+  };
+
+  const getIntroText = () => {
+    switch (variant) {
+      case 'maker':
+        return 'Learn how our AI signature maker empowers you to craft perfect signatures with intelligent customization. Our AI-powered maker combines automation with creative control to deliver signatures that match your exact vision.';
+      case 'creator':
+        return 'Discover how our AI signature creator helps you design unique, artistic signatures that represent your personal brand. Create signatures with character and style using advanced AI design technology.';
+      case 'free':
+        return 'Experience professional signature creation at zero cost with our free AI signature generator. No hidden fees, no watermarks, no limitations - just unlimited access to premium AI signature technology.';
+      default:
+        return 'Discover how our AI signature generator uses cutting-edge artificial intelligence to create professional, unique signatures in seconds. Our AI signature maker leverages advanced machine learning algorithms to generate authentic-looking signatures that perfectly match your personality and professional needs.';
+    }
+  };
   return (
     <section className="py-24 bg-gradient-to-b from-background via-secondary/5 to-background">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -42,13 +72,18 @@ export const SEOContent = () => {
           {/* Main Intro */}
           <div className="space-y-6 animate-slide-up text-center max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-extrabold text-foreground leading-tight">
-              The Ultimate <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">AI Signature Generator</span> Guide
+              {getMainTitle()}
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Discover how our <strong>AI signature generator</strong> uses cutting-edge artificial intelligence to create 
-              professional, unique signatures in seconds. Our <strong>AI signature maker</strong> leverages advanced machine 
-              learning algorithms to generate authentic-looking signatures that perfectly match your personality and professional needs.
+              {getIntroText()}
             </p>
+            {uniqueContent && (
+              <div className="text-left mt-8 p-6 bg-muted/30 rounded-xl border border-border/50">
+                <p className="text-base md:text-lg text-foreground leading-relaxed">
+                  {uniqueContent}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Features Grid */}
